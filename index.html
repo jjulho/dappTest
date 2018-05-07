@@ -137,8 +137,10 @@ function startApp() {
   web3.eth.getAccounts(function(e,r){
     document.getElementById('accountAddr').innerHTML = getLink(r[0]);
   });
+  alert("ok loading 2 addr");
   //getValue();
   getTotalPlayers();
+  alert("ok loading getTotalPlayers");
 }
 function getLink(addr) {
   return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr +'</a>';
