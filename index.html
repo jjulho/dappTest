@@ -12,20 +12,27 @@
   </style>
 </head>
 <body>
-<h3> Blockchain 에 값 읽고 쓰기   </h3>
+<h3> 게임스코어   </h3>
 <ul>
   <li>컨트랙트 주소: <span id="contractAddr"></span></li>
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
   <li>컨트랙트에 저장된 값: <span id="storedData"></span>
     <button onclick="getValue()">새로고침</button> (현재블록: <span id="lastBlock"></span>)</li>
+  
+  <li> 게임스코어 보드 : 총 등록자수 <span id="totalPlayer"></span></li>
+  <li> 1위 : <span id='GOLD'></span></li>
+  <li> 2위 : <span id='SILVER'></span></li>
+  <li> 3위 : <span id='BRONZE'></span></li>
+  
+  
+  
   <li><input id="newValue" type="text"><button onclick="setValue()">새 값으로 저장하기</button>
       <div id="result"></div></li>
   <li>새 값을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
 </ul>
-
-컨트랙트 소스
-<script src="https://gist.github.com/atomrigs/7c633570496b79623bed5d1286f93f3a.js"></script>
-
+  
+  
+  
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
