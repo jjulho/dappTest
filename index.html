@@ -14,9 +14,11 @@
 <body>
 <h3> 게임스코어 - alert track debug  </h3>
 <ul>
+	
+	alert("start");
   <li>컨트랙트 주소: <span id="contractAddr"></span></li>
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
-  
+  	alert("score");
   <!-- <li><input id="newValue" type="text"><button onclick="setValue()">점수 기록</button>
       <div id="result"></div></li>
   <li>새 값을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
@@ -131,17 +133,15 @@ window.addEventListener('load', function() {
   startApp();
 });
 function startApp() {
-  alert("init start");
   simpleStorageContract = web3.eth.contract(abi);
   simpleStorage = simpleStorageContract.at(contractAddress);
   document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
   web3.eth.getAccounts(function(e,r){
     document.getElementById('accountAddr').innerHTML = getLink(r[0]);
   });
-  alert("ok loading 2 addr");
+
   //getValue();
   getTotalPlayers();
-  alert("ok loading getTotalPlayers");
 }
 function getLink(addr) {
   return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr +'</a>';
