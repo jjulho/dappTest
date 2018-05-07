@@ -153,8 +153,7 @@ function getValue() {
 }
 function getTotalPlayers() {
   simpleStorage.GetTotalPlayers(function(e,r){
-    document.getElimentById('totalPlayers').innerHTML = r;
-	  alert(r);
+    document.getElimentById('totalPlayers').innerHTML = r.toNumber();
   });
 }
 function setValue() {
