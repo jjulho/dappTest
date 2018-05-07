@@ -165,15 +165,15 @@ function getTotalPlayers() {
 	
 function setScoreboard(){
   simpleStorage.GetScore(0,function(e,r){
-    document.getElementById('GOLD').innerHTML = r.toNumber();
+    document.getElementById('GOLD').innerHTML = r[1].toNumber();
   });
 	
   simpleStorage.GetScore(1,function(e,r){
-    document.getElementById('SILVER').innerHTML = r.toNumber();
+    document.getElementById('SILVER').innerHTML = r[1].toNumber();
   });
 	
  simpleStorage.GetScore(2,function(e,r){
-    document.getElementById('BRONZE').innerHTML = r.toNumber();
+    document.getElementById('BRONZE').innerHTML = r[1].toNumber();
   });
 
 	
