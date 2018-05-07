@@ -17,10 +17,10 @@
   <li>컨트랙트 주소: <span id="contractAddr"></span></li>
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
   
-  <li><input id="newValue" type="text"><button onclick="setValue()">점수 기록</button>
+  <!-- <li><input id="newValue" type="text"><button onclick="setValue()">점수 기록</button>
       <div id="result"></div></li>
   <li>새 값을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
-  
+  -->
   <li> 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명</li>
   <li> 1위 : <span id='GOLD'></span></li>
   <li> 2위 : <span id='SILVER'></span></li>
@@ -145,6 +145,7 @@ function startApp() {
 function getLink(addr) {
   return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr +'</a>';
 }
+/*
 function getValue() {
   simpleStorage.get(function(e,r){
     document.getElementById('storedData').innerHTML=r.toNumber();
@@ -152,12 +153,13 @@ function getValue() {
   web3.eth.getBlockNumber(function(e,r){
     document.getElementById('lastBlock').innerHTML = r;
   });
-}
+}*/
 function getTotalPlayers() {
   simpleStorage.GetTotalPlayers(function(e,r){
     document.getElimentById('totalPlayers').innerHTML = r.toNumber();
   });
 }
+/*
 function setValue() {
   var newValue = document.getElementById('newValue').value;
   var txid
@@ -177,6 +179,7 @@ function setValue() {
       }
    });
  });
+ */
 }
 </script>
 </html>
