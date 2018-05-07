@@ -166,7 +166,7 @@ function getValue() {
   });
 }
 function getTotalPlayers() {
-  simpleStorage.get(function(e,r){
+  simpleStorage.GetTotalPlayers(function(e,r){
     document.getElimentById('totalPlayers').innerHTML = r;
   });
 }
