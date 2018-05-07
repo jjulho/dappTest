@@ -141,6 +141,9 @@ function startApp() {
   //getValue();
   getTotalPlayers();
 	console.log("players read ok");
+  setScoreboard();
+	console.log("set scoreboard ok");
+	
 }
 function getLink(addr) {
   return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr +'</a>';
@@ -158,6 +161,22 @@ function getTotalPlayers() {
   simpleStorage.GetTotalPlayers(function(e,r){
     document.getElementById('totalPlayers').innerHTML = r.toNumber();
   });
+}
+	
+function setScoreboard(){
+  simpleStorage.GetTotalPlayers(0,function(e,r){
+    document.getElementById('GOLD').innerHTML = r.toNumber();
+  });
+	
+  simpleStorage.GetTotalPlayers(1,function(e,r){
+    document.getElementById('SILVER').innerHTML = r.toNumber();
+  });
+	
+ simpleStorage.GetTotalPlayers(2,function(e,r){
+    document.getElementById('BRONZE').innerHTML = r.toNumber();
+  });
+
+	
 }
 /*
 function setValue() {
