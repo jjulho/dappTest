@@ -114,8 +114,8 @@ var abi = [
 		"type": "function"
 	}
 ];
-var simpleStorageContract;
-var simpleStorage;
+var ScoreboardContract;
+var Scoreboard;
 window.addEventListener('load', function() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
@@ -131,8 +131,8 @@ window.addEventListener('load', function() {
 });
 function startApp() {
   console.log("start");
-  simpleStorageContract = web3.eth.contract(abi);
-  simpleStorage = simpleStorageContract.at(contractAddress);
+  ScoreboardContract = web3.eth.contract(abi);
+  Scoreboard = ScoreboardContract.at(contractAddress);
   document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
   web3.eth.getAccounts(function(e,r){
     document.getElementById('accountAddr').innerHTML = getLink(r[0]);
@@ -150,7 +150,7 @@ function getLink(addr) {
 }
 /*
 function getValue() {
-  simpleStorage.get(function(e,r){
+  Scoreboard.get(function(e,r){
     document.getElementById('storedData').innerHTML=r.toNumber();
   });
   web3.eth.getBlockNumber(function(e,r){
@@ -158,21 +158,21 @@ function getValue() {
   });
 }*/
 function getTotalPlayers() {
-  simpleStorage.GetTotalPlayers(function(e,r){
+  Scoreboard.GetTotalPlayers(function(e,r){
     document.getElementById('totalPlayers').innerHTML = r.toNumber();
   });
 }
 	
 function setScoreboard(){
-  simpleStorage.GetScore(0,function(e,r){
+  Scoreboard.GetScore(0,function(e,r){
     document.getElementById('GOLD').innerHTML = r[1].toNumber();
   });
 	
-  simpleStorage.GetScore(1,function(e,r){
+  Scoreboard.GetScore(1,function(e,r){
     document.getElementById('SILVER').innerHTML = r[1].toNumber();
   });
 	
- simpleStorage.GetScore(2,function(e,r){
+ Scoreboard.GetScore(2,function(e,r){
     document.getElementById('BRONZE').innerHTML = r[1].toNumber();
   });
 
