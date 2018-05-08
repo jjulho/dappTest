@@ -16,10 +16,10 @@
 <ul>
   <li>컨트랙트 주소: <span id="contractAddr"></span></li>
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
-  <!-- <li><input id="newValue" type="text"><button onclick="setValue()">점수 기록</button>
+  <li><input id="valScore" type="text"><button onclick="uploadScore()">점수 기록</button>
       <div id="result"></div></li>
   <li>새 값을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
-  -->
+	
   <li> 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명</li>
   <li> 1위 : <span id='GOLD'></span></li>
   <li> 2위 : <span id='SILVER'></span></li>
@@ -116,6 +116,7 @@ var abi = [
 ];
 var ScoreboardContract;
 var Scoreboard;
+var myAddress;
 window.addEventListener('load', function() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
@@ -135,35 +136,28 @@ function startApp() {
   Scoreboard = ScoreboardContract.at(contractAddress);
   document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
   web3.eth.getAccounts(function(e,r){
+    myAddress = r[0];
     document.getElementById('accountAddr').innerHTML = getLink(r[0]);
   });
   console.log("account read ok");
   //getValue();
   getTotalPlayers();
 	console.log("players read ok");
-  setScoreboard();
+  showScoreboard();
 	console.log("set scoreboard ok");
 	
 }
 function getLink(addr) {
   return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr +'</a>';
 }
-/*
-function getValue() {
-  Scoreboard.get(function(e,r){
-    document.getElementById('storedData').innerHTML=r.toNumber();
-  });
-  web3.eth.getBlockNumber(function(e,r){
-    document.getElementById('lastBlock').innerHTML = r;
-  });
-}*/
+
 function getTotalPlayers() {
   Scoreboard.GetTotalPlayers(function(e,r){
     document.getElementById('totalPlayers').innerHTML = r.toNumber();
   });
 }
 	
-function setScoreboard(){
+function showScoreboard(){
   Scoreboard.GetScore(0,function(e,r){
     document.getElementById('GOLD').innerHTML = r[1].toNumber();
   });
@@ -175,9 +169,14 @@ function setScoreboard(){
  Scoreboard.GetScore(2,function(e,r){
     document.getElementById('BRONZE').innerHTML = r[1].toNumber();
   });
-
-	
 }
+
+function uploadScore() {
+  var value = document.getElementById('valScore').value;
+  console.log("[upload score]:" + myAddress + ":" + value);
+  Scoreboard.SetScore(myAddress,value);  
+}
+
 /*
 function setValue() {
   var newValue = document.getElementById('newValue').value;
