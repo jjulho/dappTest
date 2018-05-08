@@ -174,7 +174,7 @@ function showScoreboard(){
 function uploadScore() {
   var value = document.getElementById('inpScore').value;
   console.log("[upload score]:" + myAddress + ":" + value);
-  Scoreboard.SetScore(myAddress,value, functoin(e,r){
+  Scoreboard.SetScore(myAddress,value, function(e,r){
      document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     txid = r;
   });  
