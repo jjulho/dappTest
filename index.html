@@ -7,8 +7,8 @@
   <title> Etherium Simple App</title>
   <style>
     body {margin-left:50px;}
-    //#storedData {font-size:300%; margin-right:10px;}
-    #newValue {width: 200px; margin-right:10px; text-align:right;}
+    #resNum {font-size:300%; margin-right:10px;}
+    #inpScore {width: 200px; margin-right:10px; text-align:right;}
   </style>
 </head>
 <body>
@@ -16,9 +16,9 @@
 <ul>
   <li>컨트랙트 주소: <span id="contractAddr"></span></li>
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
-  <li><input id="valScore" type="text"><button onclick="uploadScore()">점수 기록</button>
+  <li><input id="inpScore" type="text"><button onclick="uploadScore()">점수 기록</button>
       <div id="result"></div></li>
-  <li>새 값을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
+	<li>새 값 <span id=resNum></span>을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
 	
   <li> 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명</li>
   <li> 1위 : <span id='GOLD'></span></li>
@@ -172,9 +172,25 @@ function showScoreboard(){
 }
 
 function uploadScore() {
-  var value = document.getElementById('valScore').value;
+  var value = document.getElementById('inpScore').value;
   console.log("[upload score]:" + myAddress + ":" + value);
-  Scoreboard.SetScore(myAddress,value);  
+  Scoreboard.SetScore(myAddress,value, functoin(e,r){
+     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
+    txid = r;
+  });  
+
+  var filter = web3.eth.filter('latest');
+  filter.watch(function(e, r) {
+    getValue();
+    web3.eth.getTransaction(txid, function(e,r){
+      if (r != null && r.blockNumber > 0) {
+        document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
+        document.getElementById('pending').style.cssText ='color:green;';
+        document.getElementById('inpScore').style.cssText ='color:green; font-size:300%;';
+        filter.stopWatching();
+      }
+   });
+ });
 }
 
 /*
