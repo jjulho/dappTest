@@ -27,8 +27,6 @@
   
 </ul>
   
-  
-  
 </body>
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
@@ -118,6 +116,7 @@ var abi = [
 var ScoreboardContract;
 var Scoreboard;
 var myAddress;
+var txid;
 window.addEventListener('load', function() {
   // Checking if Web3 has been injected by the browser (Mist/MetaMask)
   if (typeof web3 !== 'undefined') {
