@@ -31,26 +31,8 @@
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
 <script>
-var contractAddress = '0xbf74149b71d8e7af0d4f181d8078162066d17ff4';
+var contractAddress = '0xbdeb7c3f41dc727000af1d53c327f2e926c6f2a8';
 var abi = [
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"name": "_s",
-				"type": "uint16"
-			}
-		],
-		"name": "SetScore",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
 	{
 		"constant": true,
 		"inputs": [
@@ -65,20 +47,6 @@ var abi = [
 				"name": "",
 				"type": "address"
 			},
-			{
-				"name": "",
-				"type": "uint16"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "GetTotalPlayers",
-		"outputs": [
 			{
 				"name": "",
 				"type": "uint16"
@@ -109,6 +77,38 @@ var abi = [
 		],
 		"payable": false,
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetTotalPlayers",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint16"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"name": "_s",
+				"type": "uint16"
+			}
+		],
+		"name": "SetScore",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
 		"type": "function"
 	}
 ];
