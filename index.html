@@ -35,7 +35,19 @@
     <body>
         <!-- Canvas placeholder -->
         <div id="screen"></div>
-
+<ul>
+  <li>컨트랙트 주소: <span id="contractAddr"></span></li>
+  <li>내 어카운트 주소: <span id="accountAddr"></span></li>
+  <li><input id="inpScore" type="text"><button onclick="uploadScore()">점수 기록</button>
+      <div id="result"></div></li>
+	<li>새 값 <span id=resNum></span>을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
+	
+  <li> 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명</li>
+  <li> 1위 : <span id='GOLD'></span></li>
+  <li> 2위 : <span id='SILVER'></span></li>
+  <li> 3위 : <span id='BRONZE'></span></li>
+  
+</ul>
         <!-- melonJS Library -->
         <script type="text/javascript" src="js/melonJS-min.js" ></script>
         <script type="text/javascript" src="build/clumsy-min.js" ></script>
