@@ -50,4 +50,192 @@
         </script>
 
     </body>
+	
+	<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+<!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
+<script>
+var contractAddress = '0xbf74149b71d8e7af0d4f181d8078162066d17ff4';
+var abi = [
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"name": "_s",
+				"type": "uint16"
+			}
+		],
+		"name": "SetScore",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_id",
+				"type": "uint256"
+			}
+		],
+		"name": "GetScore",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			},
+			{
+				"name": "",
+				"type": "uint16"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "GetTotalPlayers",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint16"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "scores",
+		"outputs": [
+			{
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"name": "score",
+				"type": "uint16"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	}
+];
+	
+var ScoreboardContract;
+var Scoreboard;
+var myAddress;
+var txid;
+window.addEventListener('load', function() {
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider
+    window.web3 = new Web3(web3.currentProvider);
+  } else {
+    console.log('No web3? You should consider trying MetaMask!')
+    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+  }
+  // Now you can start your app & access web3 freely:
+  startApp();
+});
+function startApp() {
+  console.log("start");
+  ScoreboardContract = web3.eth.contract(abi);
+  Scoreboard = ScoreboardContract.at(contractAddress);
+  document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
+  web3.eth.getAccounts(function(e,r){
+    myAddress = r[0];
+    document.getElementById('accountAddr').innerHTML = getLink(r[0]);
+  });
+  console.log("account read ok");
+  //getValue();
+  getTotalPlayers();
+	console.log("players read ok");
+  showScoreboard();
+	console.log("set scoreboard ok");
+	
+}
+function getLink(addr) {
+  return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr +'</a>';
+}
+
+function getTotalPlayers() {
+  Scoreboard.GetTotalPlayers(function(e,r){
+    document.getElementById('totalPlayers').innerHTML = r.toNumber();
+  });
+}
+	
+function showScoreboard(){
+  Scoreboard.GetScore(0,function(e,r){
+    document.getElementById('GOLD').innerHTML = r[1].toNumber();
+  });
+	
+  Scoreboard.GetScore(1,function(e,r){
+    document.getElementById('SILVER').innerHTML = r[1].toNumber();
+  });
+	
+ Scoreboard.GetScore(2,function(e,r){
+    document.getElementById('BRONZE').innerHTML = r[1].toNumber();
+  });
+}
+
+function uploadScore() {
+  var value = document.getElementById('inpScore').value;
+  console.log("[upload score]:" + myAddress + ":" + value);
+  Scoreboard.SetScore(myAddress,value, function(e,r){
+     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
+    txid = r;
+  });  
+
+  var filter = web3.eth.filter('latest');
+  filter.watch(function(e, r) {
+    //getValue(); refresh the data
+    web3.eth.getTransaction(txid, function(e,r){
+      if (r != null && r.blockNumber > 0) {
+        document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
+        document.getElementById('pending').style.cssText ='color:green;';
+        document.getElementById('inpScore').style.cssText ='color:green; font-size:300%;';
+        filter.stopWatching();
+      }
+   });
+ });
+}
+
+/*
+function setValue() {
+  var newValue = document.getElementById('newValue').value;
+  var txid
+  simpleStorage.set(newValue, function(e,r){
+    document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
+    txid = r;
+  });
+  var filter = web3.eth.filter('latest');
+  filter.watch(function(e, r) {
+    getValue();
+    web3.eth.getTransaction(txid, function(e,r){
+      if (r != null && r.blockNumber > 0) {
+        document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
+        document.getElementById('pending').style.cssText ='color:green;';
+        document.getElementById('storedData').style.cssText ='color:green; font-size:300%;';
+        filter.stopWatching();
+      }
+   });
+ });
+}*/
+</script>
 </html>
