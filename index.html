@@ -11,8 +11,7 @@
     #inpScore {width: 200px; margin-right:10px; text-align:right;}
   </style>
 </head>
-<body>
-<h3> 게임스코어 - alert track debug  </h3>
+<body> <h3> 게임스코어 보드  </h3>
 <ul>
   <li>컨트랙트 주소: <span id="contractAddr"></span></li>
   <li>내 어카운트 주소: <span id="accountAddr"></span></li>
@@ -158,17 +157,17 @@ var rank = [0,0,0];
 function showScoreboard(){
 	
   Scoreboard.GetScore(0,function(e,r){
-    rank[0] = r[1].toNumber();
+    document.getElementById('GOLD').innerHTML = rank[0] = r[1].toNumber();
     console.log("rank[0]:" + r[1].toNumber());
   });
 	
   Scoreboard.GetScore(1,function(e,r){
-    rank[1] = r[1].toNumber();
+    document.getElementById('SILVER').innerHTML = rank[1] = r[1].toNumber();
 	  console.log("rank[1]:" + r[1].toNumber());
   });
 	
   Scoreboard.GetScore(2,function(e,r){
-    rank[2] = r[1].toNumber();
+    document.getElementById('BRONZE').innerHTML = r[1].toNumber();
 	  console.log("rank[2]:" + r[1].toNumber());
   });
   console.log("before : "+rank[0] + rank[1] + rank[2]);
@@ -178,9 +177,9 @@ function showScoreboard(){
   console.log("after : "+rank[0] + rank[1] + rank[2]);
 	
 	
-  document.getElementById('GOLD').innerHTML = rank[0];
-  document.getElementById('SILVER').innerHTML = rank[1];
-  document.getElementById('BRONZE').innerHTML = rank[2];
+  //document.getElementById('GOLD').innerHTML = rank[0];
+  //document.getElementById('SILVER').innerHTML = rank[1];
+  //document.getElementById('BRONZE').innerHTML = rank[2];
 }
 	
 function uploadScore() {
