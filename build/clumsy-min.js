@@ -274,7 +274,7 @@ game.TitleScreen = me.ScreenObject.extend({
 				// 이더리움을 이곳에서 연동하면된다.
 				// ==================================================
 				var rankScore = ((this.steps * 4) - this.upcount);
-		    		if(rankScore !=NaN)console.log("rank score :"+rankScore);
+		    		if(rankScore != NaN)console.log("rank score :"+rankScore);
 		   
 
 		    
