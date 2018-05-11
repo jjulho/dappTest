@@ -1,229 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.3/milligram.min.css">
-  <title> Etherium Simple App</title>
-  <style>
-    body {margin-left:50px;}
-    #resNum {font-size:300%; margin-right:10px;}
-    #inpScore {width: 200px; margin-right:10px; text-align:right;}
-  </style>
-</head>
-<body> <h3> 게임스코어 보드  </h3>
-<ul>
-  <li>컨트랙트 주소: <span id="contractAddr"></span></li>
-  <li>내 어카운트 주소: <span id="accountAddr"></span></li>
-  <li><input id="inpScore" type="text"><button onclick="uploadScore()">점수 기록</button>
-      <div id="result"></div></li>
-	<li>새 값 <span id=resNum></span>을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
-	
-  <li> 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명</li>
-  <li> 1위 : <span id='GOLD'></span></li>
-  <li> 2위 : <span id='SILVER'></span></li>
-  <li> 3위 : <span id='BRONZE'></span></li>
-  
-</ul>
-  
-</body>
-<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
-<!-- script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script -->
-<script>
-var contractAddress = '0x5a666baeb29be4ef15b4227e123527d64744e315';
-var abi = [
-	{
-		"constant": false,
-		"inputs": [
-			{
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"name": "_s",
-				"type": "uint16"
-			}
-		],
-		"name": "SetScore",
-		"outputs": [],
-		"payable": false,
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "_id",
-				"type": "uint256"
-			}
-		],
-		"name": "GetScore",
-		"outputs": [
-			{
-				"name": "",
-				"type": "address"
-			},
-			{
-				"name": "",
-				"type": "uint16"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [],
-		"name": "GetTotalPlayers",
-		"outputs": [
-			{
-				"name": "",
-				"type": "uint16"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"constant": true,
-		"inputs": [
-			{
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "scores",
-		"outputs": [
-			{
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"name": "score",
-				"type": "uint16"
-			}
-		],
-		"payable": false,
-		"stateMutability": "view",
-		"type": "function"
-	}
-];
-	
-var ScoreboardContract;
-var Scoreboard;
-var myAddress;
-var txid;
-window.addEventListener('load', function() {
-  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
-  if (typeof web3 !== 'undefined') {
-    // Use Mist/MetaMask's provider
-    window.web3 = new Web3(web3.currentProvider);
-  } else {
-    console.log('No web3? You should consider trying MetaMask!')
-    // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-  }
-  // Now you can start your app & access web3 freely:
-  startApp();
-});
-function startApp() {
-  console.log("start");
-  ScoreboardContract = web3.eth.contract(abi);
-  Scoreboard = ScoreboardContract.at(contractAddress);
-  document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
-  web3.eth.getAccounts(function(e,r){
-    myAddress = r[0];
-    document.getElementById('accountAddr').innerHTML = getLink(r[0]);
-  });
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Clumsy Bird</title>
+        <link rel="apple-touch-icon-precomposed" href="data/img/touch-icon-iphone.png"/>
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="data/img/touch-icon-iphone-retina.png"/>
+        <link rel="shortcut icon" href="data/img/favicon.ico">
+        <link rel="stylesheet" type="text/css" media="screen" href="index.css">
+        <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="Clumsy Bird">
+        <meta charset="UTF-8" />
+        <meta name="description" content="Clumsy Bird - A Flappy Bird clone using MelonJS"/>
+        <meta name="keywords" content="flappybird, flappy, bird, game, html5, melonjs,clone"/>
+        <meta name="robots" content="index, follow">
+        <meta name="google-site-verification" content="RDZI9SqVaffd48uHfZMv67-YdvviOMe2HuULEYqVgd4" />
+        <meta property="og:image" content="http://ellisonleao.github.io/clumsy-bird/data/img/bg.png" />
+        <meta property="og:title" content="Clumsy Bird - A Flappy Bird clone using MelonJS"/>
+        <meta property="og:url" content="http://ellisonleao.github.io/clumsy-bird/"/>
+        <meta property="og:site_name" content="Clumsy Bird - MelonJS"/>
 
-  getTotalPlayers();
-  showScoreboard();
-	
-}
-function getLink(addr) {
-  return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr +'</a>';
-}
+        <!-- Twitter Card -->
+        <meta name="twitter:hashtag" content="clumsybird" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@ellisonleao" />
+        <meta name="twitter:creator" content="@ellisonleao" />
+        <meta name="twitter:title" content="Clumsy Bird" />
+        <meta name="twitter:description" content="A Flappy Bird melonJS clone" />
 
-function getTotalPlayers() {
-  Scoreboard.GetTotalPlayers(function(e,r){
-    document.getElementById('totalPlayers').innerHTML = r.toNumber();
-  });
-}
+        <!-- Humans -->
+        <link rel="author" href="humans.txt" />
+    </head>
 
-var rank = [0,0,0];
-function showScoreboard(){
-	
-  Scoreboard.GetScore(0,function(e,r){
-    document.getElementById('GOLD').innerHTML = rank[0] = r[1].toNumber();
-    console.log("rank[0]:" + r[1].toNumber());
-  });
-	
-  Scoreboard.GetScore(1,function(e,r){
-    document.getElementById('SILVER').innerHTML = rank[1] = r[1].toNumber();
-	  console.log("rank[1]:" + r[1].toNumber());
-  });
-	
-  Scoreboard.GetScore(2,function(e,r){
-    document.getElementById('BRONZE').innerHTML = r[1].toNumber();
-	  console.log("rank[2]:" + r[1].toNumber());
-  });
-  console.log("before : "+rank[0] + rank[1] + rank[2]);
-  rank.sort(function(a, b) {
-  return a - b;
-  });
-  console.log("after : "+rank[0] + rank[1] + rank[2]);
-	
-	
-  //document.getElementById('GOLD').innerHTML = rank[0];
-  //document.getElementById('SILVER').innerHTML = rank[1];
-  //document.getElementById('BRONZE').innerHTML = rank[2];
-}
-	
-function uploadScore() {
-  var value = document.getElementById('inpScore').value;
-  console.log("[upload score]:" + myAddress + ":" + value);
-  Scoreboard.SetScore(myAddress,value, function(e,r){
-     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
-    txid = r;
-  });  
+    <body>
+        <!-- Canvas placeholder -->
+        <div id="screen"></div>
 
-  var filter = web3.eth.filter('latest');
-  filter.watch(function(e, r) {
-    //getValue(); refresh the data
-    web3.eth.getTransaction(txid, function(e,r){
-      if (r != null && r.blockNumber > 0) {
-        document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
-        document.getElementById('pending').style.cssText ='color:green;';
-        document.getElementById('inpScore').style.cssText ='color:green; font-size:300%;';
-        filter.stopWatching();
-      }
-   });
- });
-}
+        <!-- melonJS Library -->
+        <script type="text/javascript" src="js/melonJS-min.js" ></script>
+        <script type="text/javascript" src="build/clumsy-min.js" ></script>
+        <script type="text/javascript">
+            window.onReady(function onReady() {
+                game.onload();
+            });
+        </script>
 
-/*
-function setValue() {
-  var newValue = document.getElementById('newValue').value;
-  var txid
-  simpleStorage.set(newValue, function(e,r){
-    document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
-    txid = r;
-  });
-  var filter = web3.eth.filter('latest');
-  filter.watch(function(e, r) {
-    getValue();
-    web3.eth.getTransaction(txid, function(e,r){
-      if (r != null && r.blockNumber > 0) {
-        document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
-        document.getElementById('pending').style.cssText ='color:green;';
-        document.getElementById('storedData').style.cssText ='color:green; font-size:300%;';
-        filter.stopWatching();
-      }
-   });
- });
-}*/
-</script>
+    </body>
 </html>
