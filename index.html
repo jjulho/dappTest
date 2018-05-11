@@ -160,14 +160,17 @@ function showScoreboard(){
 	
   Scoreboard.GetScore(0,function(e,r){
     rank[0] = r[1].toNumber();
+    console.log("rank[0]:" + r[1].toNumber());
   });
 	
   Scoreboard.GetScore(1,function(e,r){
     rank[1] = r[1].toNumber();
+	  console.log("rank[1]:" + r[1].toNumber());
   });
 	
   Scoreboard.GetScore(2,function(e,r){
     rank[2] = r[1].toNumber();
+	  console.log("rank[2]:" + r[1].toNumber());
   });
   console.log("before : "+rank[0] + rank[1] + rank[2]);
   rank.sort(function(a, b) {
