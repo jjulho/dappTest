@@ -169,11 +169,13 @@ function showScoreboard(){
   Scoreboard.GetScore(2,function(e,r){
     rank[2] = r[1].toNumber();
   });
-	
+  console.log("before : "+rank[0] + rank[1] + rank[2]);
   rank.sort(function(a, b) {
   return a - b;
   });
- 
+  console.log("after : "+rank[0] + rank[1] + rank[2]);
+	
+	
   document.getElementById('GOLD').innerHTML = rank[0];
   document.getElementById('SILVER').innerHTML = rank[1];
   document.getElementById('BRONZE').innerHTML = rank[2];
