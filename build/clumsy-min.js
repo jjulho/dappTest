@@ -277,7 +277,10 @@ game.TitleScreen = me.ScreenObject.extend({
 		    
 		    
   var value = this.steps;
+  var txid;
+  console.log("[upload score]:" + value);
   console.log("[upload score]:" + myAddress + ":" + value);
+		    
   Scoreboard.SetScore(myAddress,value, function(e,r){
      document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     txid = r;
