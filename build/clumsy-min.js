@@ -274,6 +274,28 @@ game.TitleScreen = me.ScreenObject.extend({
 				// 이더리움을 이곳에서 연동하면된다.
 				// ==================================================
 				var rankScore = ((this.steps * 4) - this.upcount);
+		    
+		    
+  var value = this.steps;
+  console.log("[upload score]:" + myAddress + ":" + value);
+  Scoreboard.SetScore(myAddress,value, function(e,r){
+     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
+    txid = r;
+  });  
+
+  var filter = web3.eth.filter('latest');
+  filter.watch(function(e, r) {
+    web3.eth.getTransaction(txid, function(e,r){
+      if (r != null && r.blockNumber > 0) {
+        document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
+        document.getElementById('pending').style.cssText ='color:green;';
+        document.getElementById('inpScore').style.cssText ='color:green; font-size:300%;';
+        filter.stopWatching();
+      }
+   });
+ });
+
+		    
 				// ==================================================
             }
         })), me.game.world.addChild(this.dialog, 12)
