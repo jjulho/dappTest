@@ -139,12 +139,9 @@ function startApp() {
     myAddress = r[0];
     document.getElementById('accountAddr').innerHTML = getLink(r[0]);
   });
-  console.log("account read ok");
-  //getValue();
+
   getTotalPlayers();
-	console.log("players read ok");
   showScoreboard();
-	console.log("set scoreboard ok");
 	
 }
 function getLink(addr) {
@@ -180,6 +177,7 @@ function showScoreboard(){
   document.getElementById('GOLD').innerHTML = rank[0];
   document.getElementById('SILVER').innerHTML = rank[1];
   document.getElementById('BRONZE').innerHTML = rank[2];
+}
 	
 function uploadScore() {
   var value = document.getElementById('inpScore').value;
