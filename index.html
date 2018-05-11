@@ -153,10 +153,9 @@ function getTotalPlayers() {
     document.getElementById('totalPlayers').innerHTML = r.toNumber();
   });
 }
-	
+
+var rank = [0,0,0];
 function showScoreboard(){
-	
-  var rank = [0,0,0];
 	
   Scoreboard.GetScore(0,function(e,r){
     rank[0] = r[1].toNumber();
