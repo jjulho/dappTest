@@ -158,19 +158,29 @@ function getTotalPlayers() {
 }
 	
 function showScoreboard(){
+	
+  var rank = [0,0,0];
+	
   Scoreboard.GetScore(0,function(e,r){
-    document.getElementById('GOLD').innerHTML = r[1].toNumber();
+    rank[0] = r[1].toNumber();
   });
 	
   Scoreboard.GetScore(1,function(e,r){
-    document.getElementById('SILVER').innerHTML = r[1].toNumber();
+    rank[1] = r[1].toNumber();
   });
 	
- Scoreboard.GetScore(2,function(e,r){
-    document.getElementById('BRONZE').innerHTML = r[1].toNumber();
+  Scoreboard.GetScore(2,function(e,r){
+    rank[2] = r[1].toNumber();
   });
-}
-
+	
+  rank.sort(function(a, b) {
+  return a - b;
+  });
+ 
+  document.getElementById('GOLD').innerHTML = rank[0];
+  document.getElementById('SILVER').innerHTML = rank[1];
+  document.getElementById('BRONZE').innerHTML = rank[2];
+	
 function uploadScore() {
   var value = document.getElementById('inpScore').value;
   console.log("[upload score]:" + myAddress + ":" + value);
