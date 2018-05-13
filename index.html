@@ -29,16 +29,16 @@
         <!-- Canvas placeholder -->
         <div id="screen"></div>
 <ul>
-  <li>컨트랙트 주소: <span id="contractAddr"></span></li>
-  <li>내 어카운트 주소: <span id="accountAddr"></span></li>
+  <li>Contract Address: <span id="contractAddr"></span></li>
+  <li>My Account Address: <span id="accountAddr"></span></li>
   <li><input id="inpScore" type="text"><button onclick="uploadScore()">점수 기록</button>
       <div id="result"></div></li>
-	
+
   <li> ** 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명 **</li>
   <li> 1위 : <span id='GOLD'></span></li>
   <li> 2위 : <span id='SILVER'></span></li>
   <li> 3위 : <span id='BRONZE'></span></li>
-  
+
 </ul>
         <!-- melonJS Library -->
         <script type="text/javascript" src="js/melonJS-min.js" ></script>
@@ -50,7 +50,7 @@
         </script>
 
     </body>
-	
+
 <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 <script>
 var contractAddress = '0x5a666baeb29be4ef15b4227e123527d64744e315';
@@ -134,7 +134,7 @@ var abi = [
 		"type": "function"
 	}
 ];
-	
+
 var ScoreboardContract;
 var Scoreboard;
 var myAddress;
@@ -167,7 +167,7 @@ function startApp() {
 	console.log("players read ok");
   showScoreboard();
 	console.log("set scoreboard ok");
-	
+
 }
 function getLink(addr) {
   return '<a target="_blank" href=https://testnet.etherscan.io/address/' + addr + '>' + addr +'</a>';
@@ -178,16 +178,16 @@ function getTotalPlayers() {
     document.getElementById('totalPlayers').innerHTML = r.toNumber();
   });
 }
-	
+
 function showScoreboard(){
   Scoreboard.GetScore(0,function(e,r){
     document.getElementById('GOLD').innerHTML = r[1].toNumber();
   });
-	
+
   Scoreboard.GetScore(1,function(e,r){
     document.getElementById('SILVER').innerHTML = r[1].toNumber();
   });
-	
+
  Scoreboard.GetScore(2,function(e,r){
     document.getElementById('BRONZE').innerHTML = r[1].toNumber();
   });
@@ -199,7 +199,7 @@ function uploadScore() {
   Scoreboard.SetScore(myAddress,value, function(e,r){
      document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     txid = r;
-  });  
+  });
 
   var filter = web3.eth.filter('latest');
   filter.watch(function(e, r) {
