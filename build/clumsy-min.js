@@ -276,7 +276,8 @@ game.TitleScreen = me.ScreenObject.extend({
 				var rankScore = ((this.steps * 4) - this.upcount);
 
 		    		console.log("steps :"+this.steps);
-            alert("do you want to upload your score? it cost 0.0x ethereum!");
+            if (game.data.steps > me.save.topSteps)
+              console.log("new high score!!");
 		    		//if(rankScore != NaN)console.log("rank score :"+rankScore);
 
 
