@@ -265,7 +265,7 @@ game.TitleScreen = me.ScreenObject.extend({
             draw: function(a) {
                 var b = this.font.measureText(a, this.steps);
                 this.font.measureText(a, this.topSteps), this.font.measureText(a, this.score), this.font.measureText(a, this.rankScore),
-                this.font.draw(a, this.steps, me.game.viewport.width / 2 - b.width / 2 - 60, me.game.viewport.height / 2), 
+                this.font.draw(a, this.steps, me.game.viewport.width / 2 - b.width / 2 - 60, me.game.viewport.height / 2),
 				this.font.draw(a, this.topSteps, me.game.viewport.width / 2 - b.width / 2 - 60, me.game.viewport.height / 2 + 50),
 				this.font.draw(a, this.rankScore, me.game.viewport.width / 2 - b.width / 2 - 60, me.game.viewport.height / 2 + 100);
 
@@ -274,12 +274,13 @@ game.TitleScreen = me.ScreenObject.extend({
 				// 이더리움을 이곳에서 연동하면된다.
 				// ==================================================
 				var rankScore = ((this.steps * 4) - this.upcount);
-		    
-		    		console.log("steps :"+this.steps);
-		    		//if(rankScore != NaN)console.log("rank score :"+rankScore);
-		   
 
-		    
+		    		console.log("steps :"+this.steps);
+            alert("do you want to upload your score? it cost 0.0x ethereum!");
+		    		//if(rankScore != NaN)console.log("rank score :"+rankScore);
+
+
+
 				// ==================================================
             }
         })), me.game.world.addChild(this.dialog, 12)
