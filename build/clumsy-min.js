@@ -96,9 +96,9 @@ game.BirdEntity = me.Entity.extend({
             var c = this.pos.y;
             this.angleTween.stop(), this.flyTween.stop(), this.flyTween.to({
                 y: c - 72
-            }, 50), this.flyTween.start(), game.data.upcount++,this.angleTween.to({
+            }, 30), this.flyTween.start(), game.data.upcount++,this.angleTween.to({
                 currentAngle: b.maxAngleRotation
-            }, 50).onComplete(function(a) {
+            }, 100).onComplete(function(a) {
                 b.renderable.currentTransform.rotate(b.maxAngleRotation)
             }), this.angleTween.start()
         } else this.gravityForce += .2, this.pos.y += me.timer.tick * this.gravityForce, this.currentAngle += Number.prototype.degToRad(3), this.currentAngle >= this.maxAngleRotationDown && (this.renderable.currentTransform.identity(), this.currentAngle = this.maxAngleRotationDown);
@@ -133,17 +133,26 @@ game.BirdEntity = me.Entity.extend({
     }
 }), game.PipeGenerator = me.Renderable.extend({
     init: function() {
-        this._super(me.Renderable, "init", [0, me.game.viewport.width, me.game.viewport.height, 92]), this.alwaysUpdate = !0, this.generate = 0, this.pipeFrequency = 92, this.pipeHoleSize = 1240, this.posX = me.game.viewport.width
+        this._super(me.Renderable, "init", [0, me.game.viewport.width, me.game.viewport.height, 92]), this.alwaysUpdate = !0, this.generate = 0, this.pipeFrequency = 85, this.pipeHoleSize = 1240, this.posX = me.game.viewport.width
     },
     update: function(a) {
         if (this.generate++ % this.pipeFrequency == 0) {
+			//==================================================
+			// 미묘한 손맛의 차이를 느끼게 하기 위해
+			// 파이프의 높이를 미묘하게 다르게 한다.
+			//==================================================
+			var randDifficult= Math.round(Math.random()*100)%26;
+			if( randDifficult > 11 )
+				randDifficult = -1*(randDifficult-11);
+			//==================================================
+
             var b = Number.prototype.random(me.video.renderer.getHeight() - 100, 200),
-                c = b - me.game.viewport.height - this.pipeHoleSize,
+                c = b - me.game.viewport.height - this.pipeHoleSize +randDifficult,
                 d = new me.pool.pull("pipe", this.posX, b),
                 e = new me.pool.pull("pipe", this.posX, c),
                 f = b - 100,
                 g = new me.pool.pull("hit", this.posX, f);
-            d.renderable.currentTransform.scaleY(-1), me.game.world.addChild(d, 10), me.game.world.addChild(e, 10), me.game.world.addChild(g, 11)
+            d.renderable.currentTransform.scaleY(-1), me.game.world.addChild(d, 10), me.game.world.addChild(e, 10), me.game.world.addChild(g, 11);
         }
         this._super(me.Entity, "update", [a])
     }
@@ -251,6 +260,15 @@ game.TitleScreen = me.ScreenObject.extend({
         var a = new me.Sprite(me.game.viewport.width / 2, me.game.viewport.height / 2, {
             image: "gameoverbg"
         });
+		// ==================================================
+		// todo
+		// 이더리움을 이곳에서 연동하면된다.
+		// ==================================================
+		var rankScore = ((game.data.steps * 4) - game.data.upcount);
+		// ==================================================
+		console.log( rankScore );
+		// ==================================================
+
         if (me.game.world.addChild(a, 10), me.game.world.addChild(new BackgroundLayer("bg", 1)), this.ground1 = me.pool.pull("ground", 0, me.game.viewport.height - 96), this.ground2 = me.pool.pull("ground", me.game.viewport.width, me.video.renderer.getHeight() - 96), me.game.world.addChild(this.ground1, 11), me.game.world.addChild(this.ground2, 11), game.data.newHiScore) {
             var b = new me.Sprite(a.width / 2, a.height / 2, {
                 image: "new"
@@ -268,25 +286,11 @@ game.TitleScreen = me.ScreenObject.extend({
                 this.font.draw(a, this.steps, me.game.viewport.width / 2 - b.width / 2 - 60, me.game.viewport.height / 2),
 				this.font.draw(a, this.topSteps, me.game.viewport.width / 2 - b.width / 2 - 60, me.game.viewport.height / 2 + 50),
 				this.font.draw(a, this.rankScore, me.game.viewport.width / 2 - b.width / 2 - 60, me.game.viewport.height / 2 + 100);
-
-				// ==================================================
-				// todo
-				// 이더리움을 이곳에서 연동하면된다.
-				// ==================================================
-				var rankScore = ((this.steps * 4) - this.upcount);
-
-		    		console.log("steps :"+this.steps);
-            if (game.data.steps > me.save.topSteps)
-              console.log("new high score!!");
-		    		//if(rankScore != NaN)console.log("rank score :"+rankScore);
-
-
-
-				// ==================================================
             }
         })), me.game.world.addChild(this.dialog, 12)
     },
     onDestroyEvent: function() {
+
         me.event.unsubscribe(this.handler), me.input.unbindKey(me.input.KEY.ENTER), me.input.unbindKey(me.input.KEY.SPACE), me.input.unbindPointer(me.input.pointer.LEFT), this.ground1 = null, this.ground2 = null, this.font = null, me.audio.stop("theme")
     }
 });
