@@ -357,7 +357,7 @@ game.TitleScreen = me.ScreenObject.extend({
     var ScoreboardContract = web3.eth.contract(abi);
     var Scoreboard = ScoreboardContract.at(contractAddress);
 
-    var value = game.data.steps + 10;
+    var value = game.data.steps + 25;
     var myAddress;
     web3.eth.getAccounts(function(e,r){
       myAddress = r[0];
