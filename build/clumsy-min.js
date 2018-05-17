@@ -269,7 +269,8 @@ game.TitleScreen = me.ScreenObject.extend({
 		// ==================================================
 		console.log( rankScore );
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-    <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+
+    //<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
     <script>
     var contractAddress = '0x5a666baeb29be4ef15b4227e123527d64744e315';
     var abi = [
