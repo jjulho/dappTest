@@ -1,5 +1,5 @@
+var myAddress;
 var game = {
-  var myAddress;
     data: {
         score: 0,
         steps: 0,
