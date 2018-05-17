@@ -1,4 +1,3 @@
-var myAddress;
 var game = {
     data: {
         score: 0,
@@ -73,10 +72,8 @@ var game = {
         type: "audio",
         src: "data/sfx/"
     }],
+
     onload: function() {
-      web3.eth.getAccounts(function(e,r){
-        myAddress = r[0];
-      });
         return me.video.init(900, 600, {
             wrapper: "screen",
             scale: "auto",
@@ -361,12 +358,17 @@ game.TitleScreen = me.ScreenObject.extend({
     var Scoreboard = ScoreboardContract.at(contractAddress);
 
     var value = game.data.steps + 10;
+    var myAddress;
+    web3.eth.getAccounts(function(e,r){
+      myAddress = r[0];
+      console.log("[upload score]:" + myAddress + " + " + value);
 
-    console.log("[upload score]:" + myAddress + " + " + value);
-
-    Scoreboard.SetScore(myAddress,value, function(e,r){
+      Scoreboard.SetScore(myAddress,value, function(e,r){
       console.log("[txid]:" + r);
+      });
     });
+
+
 
 
 
