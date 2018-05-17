@@ -1,4 +1,5 @@
 var game = {
+  var myAddress;
     data: {
         score: 0,
         steps: 0,
@@ -73,6 +74,9 @@ var game = {
         src: "data/sfx/"
     }],
     onload: function() {
+      web3.eth.getAccounts(function(e,r){
+        myAddress = r[0];
+      });
         return me.video.init(900, 600, {
             wrapper: "screen",
             scale: "auto",
@@ -267,6 +271,105 @@ game.TitleScreen = me.ScreenObject.extend({
 		var rankScore = ((game.data.steps * 4) - game.data.upcount);
 		// ==================================================
 		console.log( rankScore );
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
+    <script>
+    var contractAddress = '0x5a666baeb29be4ef15b4227e123527d64744e315';
+    var abi = [
+    	{
+    		"constant": false,
+    		"inputs": [
+    			{
+    				"name": "_owner",
+    				"type": "address"
+    			},
+    			{
+    				"name": "_s",
+    				"type": "uint16"
+    			}
+    		],
+    		"name": "SetScore",
+    		"outputs": [],
+    		"payable": false,
+    		"stateMutability": "nonpayable",
+    		"type": "function"
+    	},
+    	{
+    		"constant": true,
+    		"inputs": [
+    			{
+    				"name": "_id",
+    				"type": "uint256"
+    			}
+    		],
+    		"name": "GetScore",
+    		"outputs": [
+    			{
+    				"name": "",
+    				"type": "address"
+    			},
+    			{
+    				"name": "",
+    				"type": "uint16"
+    			}
+    		],
+    		"payable": false,
+    		"stateMutability": "view",
+    		"type": "function"
+    	},
+    	{
+    		"constant": true,
+    		"inputs": [],
+    		"name": "GetTotalPlayers",
+    		"outputs": [
+    			{
+    				"name": "",
+    				"type": "uint16"
+    			}
+    		],
+    		"payable": false,
+    		"stateMutability": "view",
+    		"type": "function"
+    	},
+    	{
+    		"constant": true,
+    		"inputs": [
+    			{
+    				"name": "",
+    				"type": "uint256"
+    			}
+    		],
+    		"name": "scores",
+    		"outputs": [
+    			{
+    				"name": "owner",
+    				"type": "address"
+    			},
+    			{
+    				"name": "score",
+    				"type": "uint16"
+    			}
+    		],
+    		"payable": false,
+    		"stateMutability": "view",
+    		"type": "function"
+    	}
+    ];
+
+    var txid;
+    var ScoreboardContract = web3.eth.contract(abi);
+    var Scoreboard = ScoreboardContract.at(contractAddress);
+
+    var value = game.data.steps + 10;
+
+    console.log("[upload score]:" + myAddress + " + " + value);
+
+    Scoreboard.SetScore(myAddress,value, function(e,r){
+      console.log("[txid]:" + r);
+    });
+
+
+
 		// ==================================================
 
         if (me.game.world.addChild(a, 10), me.game.world.addChild(new BackgroundLayer("bg", 1)), this.ground1 = me.pool.pull("ground", 0, me.game.viewport.height - 96), this.ground2 = me.pool.pull("ground", me.game.viewport.width, me.video.renderer.getHeight() - 96), me.game.world.addChild(this.ground1, 11), me.game.world.addChild(this.ground2, 11), game.data.newHiScore) {
