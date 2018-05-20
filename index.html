@@ -33,7 +33,7 @@
   <li>My Account Address: <span id="accountAddr"></span></li>
   <li><input id="inpScore" type="text"><button onclick="uploadScore()">점수 기록</button>
       <div id="result"></div></li>
-
+  <img src="/data/img/cryptolypic_scoreboard.png">
   <li> ** 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명 **</li>
   <li> 1위 : <span id='GOLD'></span></li>
   <li> 2위 : <span id='SILVER'></span></li>
@@ -153,7 +153,6 @@ window.addEventListener('load', function() {
   startApp();
 });
 function startApp() {
-  console.log("start");
   ScoreboardContract = web3.eth.contract(abi);
   Scoreboard = ScoreboardContract.at(contractAddress);
   document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
@@ -161,12 +160,9 @@ function startApp() {
     myAddress = r[0];
     document.getElementById('accountAddr').innerHTML = getLink(r[0]);
   });
-  console.log("account read ok");
-  //getValue();
+
   getTotalPlayers();
-	console.log("players read ok");
   showScoreboard();
-	console.log("set scoreboard ok");
 
 }
 function getLink(addr) {

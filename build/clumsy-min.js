@@ -268,7 +268,7 @@ game.TitleScreen = me.ScreenObject.extend({
 		var rankScore = ((game.data.steps * 4) - game.data.upcount);
 		// ==================================================
 		console.log( rankScore );
-    //window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+    window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
     //<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
     var contractAddress = '0x5a666baeb29be4ef15b4227e123527d64744e315';
@@ -357,7 +357,7 @@ game.TitleScreen = me.ScreenObject.extend({
     var ScoreboardContract = web3.eth.contract(abi);
     var Scoreboard = ScoreboardContract.at(contractAddress);
 
-    var value = game.data.steps + 25;
+    var value = game.data.steps + 10;
     var myAddress;
     web3.eth.getAccounts(function(e,r){
       myAddress = r[0];
