@@ -102,7 +102,7 @@ function getTotalPlayers() {
 }
 
 function showScoreboard(){
-  var scoreArray[3];
+  var scoreArray = new Array(3);
   Scoreboard.GetScore(0,function(e,r){
     scoreArray[0] = r[1].toNumber();
 
@@ -111,6 +111,7 @@ function showScoreboard(){
 
       Scoreboard.GetScore(2,function(e,r){
          scoreArray[2] = r[1].toNumber();
+
          scoreArray.sort(function(a, b) {
            return a - b;
          });
