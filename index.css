@@ -18,7 +18,7 @@ body {
 }
 
 .scoreboard {
-  width : device-width; height : 900px; background-image : url('data/img/scoreboard.png');
+  width : 500px; height : 300px; background-image : url('data/img/scoreboard.png');
 }
 
 #screen canvas {
