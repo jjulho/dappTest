@@ -26,8 +26,8 @@ body {
   background-repeat: no-repeat;
 }
 .record {
-  margin:auto;
-  line-height: 180%;
+  margin-left: 30px;
+  line-height: 300%;
   font-size: 30px;
   color: white;
 }
