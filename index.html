@@ -38,7 +38,7 @@
 
       <div id='scoreboard'>
 
-        <span id='scoreboard-title' ="center"> Cryptolympic Scoreboard </span><br/>
+        <span id='scoreboard-title' ="center"> </span><br/>
         <span id='GOLD' class='record'> none </span><br/>
         <span id='SILVER' class='record'> none </span><br/>
         <span id='BRONZE' class='record'> none </span><br/>
@@ -129,9 +129,9 @@ function showScoreboard(){
          scoreArray.sort(function(a, b) {
            return b - a;
          });
-         document.getElementById('GOLD').innerHTML = scoreArray[0]+' point, ['+ addrArray[0]+']';
-         document.getElementById('SILVER').innerHTML = scoreArray[1]+' point, ['+ addrArray[1]+']';
-         document.getElementById('BRONZE').innerHTML = scoreArray[2]+' point, ['+ addrArray[2]+']';
+         document.getElementById('GOLD').innerHTML = '[user] '+ addrArray[0] +'  [score] ' + scoreArray[0];
+         document.getElementById('SILVER').innerHTML = '[user] '+ addrArray[1] +'  [score] ' + scoreArray[1];
+         document.getElementById('BRONZE').innerHTML = '[user] '+ addrArray[2] +'  [score] ' + scoreArray[2];
 
        });
     });
