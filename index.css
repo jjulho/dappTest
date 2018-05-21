@@ -17,12 +17,25 @@ body {
   margin: 0;
 }
 
-.scoreboard {
-  background-image : url('data/img/scoreboard.png');
-  background-size : auto;
+#scoreboard {
+  margin-left: 80px;
+  display: block;
+  height: 500px;
+  background-image: url('data/img/scoreboard.png');
+  background-size: contain;
   background-repeat: no-repeat;
-  
-  margin: auto;
+}
+.record {
+  margin:auto;
+  line-height: 180%;
+  font-size: 50px;
+  color: white;
+}
+#scoreboard-title {
+  margin:auto;
+  line-height: 120%;
+  font-size: 50px;
+  color: red;
 }
 
 #screen canvas {
