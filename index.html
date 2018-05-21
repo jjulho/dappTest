@@ -119,9 +119,9 @@ function showScoreboard(){
          scoreArray.sort(function(a, b) {
            return b - a;
          });
-         document.getElementById('GOLD').innerHTML = addrArray[0] +','+ scoreArray[0];
-         document.getElementById('SILVER').innerHTML = addrArray[1] +','+ scoreArray[1];
-         document.getElementById('BRONZE').innerHTML = addrArray[2] +','+ scoreArray[2];
+         document.getElementById('GOLD').innerHTML = scoreArray[0]+'point, ['addrArray[0]+']';
+         document.getElementById('SILVER').innerHTML = scoreArray[1]+'point, ['addrArray[1]+']';
+         document.getElementById('BRONZE').innerHTML = scoreArray[2]+'point, ['addrArray[2]+']';
 
        });
     });
