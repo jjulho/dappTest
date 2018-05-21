@@ -17,6 +17,10 @@ body {
   margin: 0;
 }
 
+.scoreboard {
+  width : 100%; background-image : url('data/img/scoreboard.png');
+}
+
 #screen canvas {
   margin: auto;
   /* Hide the gap for font descenders. */
