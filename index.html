@@ -117,18 +117,18 @@ function showScoreboard(){
   Scoreboard.GetScore(0,function(e,r){
     scoreArray[0] = r[1].toNumber();
     addrArray[0] = r[0].toString();
-    addrArray[0] = addrArray[0].substring(0,4);
+    addrArray[0] = addrArray[0].substring(0,6)+'...';
 
 
     Scoreboard.GetScore(1,function(e,r){
       scoreArray[1] = r[1].toNumber();
       addrArray[1] = r[0].toString();
-      addrArray[1] = addrArray[1].substring(0,4);
+      addrArray[1] = addrArray[1].substring(0,6)+'...';
 
       Scoreboard.GetScore(2,function(e,r){
          scoreArray[2] = r[1].toNumber();
          addrArray[2] = r[0].toString();
-         addrArray[2] = addrArray[2].substring(0,4);
+         addrArray[2] = addrArray[2].substring(0,8)+'...';
 
          scoreArray.sort(function(a, b) {
            return b - a;
