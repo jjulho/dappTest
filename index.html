@@ -113,7 +113,7 @@ function showScoreboard(){
          scoreArray[2] = r[1].toNumber();
 
          scoreArray.sort(function(a, b) {
-           return a - b;
+           return b - a;
          });
          document.getElementById('GOLD').innerHTML = scoreArray[0];
          document.getElementById('SILVER').innerHTML = scoreArray[1];
