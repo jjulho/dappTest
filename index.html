@@ -35,7 +35,35 @@
 
        <!-- 스코어 보드 이미지 표시영역 -->
 
+  <style>
+  #scoreboard-table{
+    width: 100%;
+    border: 2px solid white;
+    border-collapse: collapse;
+  }
+  th, td{
+    border: 2px solid white;
+  }
+  </style>
 
+  <table id=scoreboard-table>
+    <thread>
+      <tr>
+        <th> Country </th> <th> Account </th> <th> Score </th> <th> Eth</th>
+      </tr>
+    </tread>
+    <tbody>
+      <tr>
+        <td id=gold_country> korea </td> <td id=gold_account></td> <td id=gold_score> </td> <td id=gold_eth></td>
+      </tr>
+      <tr>
+        <td id=silver_country> china </td> <td id=silver_account></td> <td id=silver_score> </td> <td id=silver_eth></td>
+      </tr>
+      <tr>
+        <td id=bronze_country> japan </td> <td id=bronze_account></td> <td id=bronze_score> </td> <td id=bronze_eth></td>
+      </tr>
+    </tbody>
+  </table>
       <div id='scoreboard'>
 
         <span id='scoreboard-title' align="center"> </span><br/></br>
@@ -53,8 +81,8 @@
         <script type="text/javascript" src="js/melonJS-min.js" ></script>
         <script type="text/javascript" src="build/clumsy-min.js" ></script>
         <script type="text/javascript">
-            window.onReady(function onReady() {
-                game.onload();
+          //  window.onReady(function onReady() {
+            //    game.onload();
             });
         </script>
 
@@ -133,9 +161,14 @@ function showScoreboard(){
          scoreArray.sort(function(a, b) {
            return b - a;
          });
-         document.getElementById('GOLD').innerHTML = '[user] '+ addrArray[0] +'  [score] ' + scoreArray[0];
-         document.getElementById('SILVER').innerHTML = '[user] '+ addrArray[1] +'  [score] ' + scoreArray[1];
-         document.getElementById('BRONZE').innerHTML = '[user] '+ addrArray[2] +'  [score] ' + scoreArray[2];
+         document.getElementById('gold_account').innerHTML = addrArray[0];
+         document.getElementById('gold_score').innerHTML = scoreArray[0];
+
+         document.getElementById('silver_account').innerHTML = addrArray[1];
+         document.getElementById('silver_score').innerHTML = scoreArray[1];
+
+         document.getElementById('silver_account').innerHTML = addrArray[2];
+         document.getElementById('silver_score').innerHTML = scoreArray[2];
 
        });
     });
