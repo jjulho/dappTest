@@ -30,11 +30,15 @@
 <ul>
   <li>Contract Address: <span id="contractAddr"></span></li>
   <li>My Account Address: <span id="accountAddr"></span></li>
-  <li><input id="inpScore" type="text"><button onclick="uploadScore()">점수 기록</button>
-      <div id="result"></div></li>
+  <li></li>
 
   <style>
   #scoreboard-table{
+    width: 100%;
+    border: 2px solid white;
+    border-collapse: collapse;
+  }
+  #test-tableP{
     width: 100%;
     border: 2px solid white;
     border-collapse: collapse;
@@ -45,6 +49,8 @@
     font-size: 20px;
   }
   </style>
+
+  <li> ** 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명 **</li>
 
   <table id=scoreboard-table>
     <thread>
@@ -63,14 +69,31 @@
       <tr>
         <td id=bronze_country> japan </td> <td id=bronze_account></td> <td id=bronze_score> </td> <td id=bronze_prize></td>
       </tr>
-      <tr>
-        <td> Total Players </td>
-      </tr>
     </tbody>
   </table>
 
+</br>
 
-  <li> ** 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명 **</li>
+  <table id=test-table>
+      <th colspan="2"> Test Information </th>
+      <tr>
+          <td> My Account </td> <td id=contractAddr> none </td>
+      </tr>
+      <tr>
+          <td> Contract addr </td> <td id=contractAddr> none </td>
+      </tr>
+      <tr>
+          <td> Total Prize (Eth) </td> <td id=total-players> none </td>
+      </tr>
+      <tr>
+          <td> Total Players </td> <td id=total-players> none </td>
+      </tr>
+      <tr>
+          <td> Input Score </td> <td id=contractAddr> <input id="inpScore" type="text"><button onclick="uploadScore()">점수 기록</button>
+              <div id="result"></div> </td>
+      </tr>
+    </tbody>
+  </table>
 
 </ul>
         <!-- melonJS Library -->
