@@ -33,8 +33,6 @@
   <li><input id="inpScore" type="text"><button onclick="uploadScore()">점수 기록</button>
       <div id="result"></div></li>
 
-       <!-- 스코어 보드 이미지 표시영역 -->
-
   <style>
   #scoreboard-table{
     width: 100%;
@@ -43,36 +41,34 @@
   }
   th, td{
     border: 2px solid white;
+    text-align: center;
+    font-size: 20px;
   }
   </style>
 
   <table id=scoreboard-table>
     <thread>
+      <tr> <th colspan="5"> Cryptolympic Scoreboard </th> </tr>
       <tr>
-        <th> Country </th> <th> Account </th> <th> Score </th> <th> Eth</th>
+        <th> Country </th> <th> Account </th> <th> Score </th> <th> Prize (Eth) </th>
       </tr>
     </tread>
     <tbody>
       <tr>
-        <td id=gold_country> korea </td> <td id=gold_account></td> <td id=gold_score> </td> <td id=gold_eth></td>
+        <td id=gold_country> korea </td> <td id=gold_account></td> <td id=gold_score> </td> <td id=gold_prize> 5 </td>
       </tr>
       <tr>
-        <td id=silver_country> china </td> <td id=silver_account></td> <td id=silver_score> </td> <td id=silver_eth></td>
+        <td id=silver_country> china </td> <td id=silver_account></td> <td id=silver_score> </td> <td id=silver_prize></td>
       </tr>
       <tr>
-        <td id=bronze_country> japan </td> <td id=bronze_account></td> <td id=bronze_score> </td> <td id=bronze_eth></td>
+        <td id=bronze_country> japan </td> <td id=bronze_account></td> <td id=bronze_score> </td> <td id=bronze_prize></td>
+      </tr>
+      <tr>
+        <td> Total Players </td>
       </tr>
     </tbody>
   </table>
-      <div id='scoreboard'>
 
-        <span id='scoreboard-title' align="center"> </span><br/></br>
-        <span id='GOLD' class='record'> none </span><br/>
-        <span id='SILVER' class='record'> none </span><br/>
-        <span id='BRONZE' class='record'> none </span><br/>
-
-
-      </div>
 
   <li> ** 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명 **</li>
 
@@ -81,8 +77,8 @@
         <script type="text/javascript" src="js/melonJS-min.js" ></script>
         <script type="text/javascript" src="build/clumsy-min.js" ></script>
         <script type="text/javascript">
-          //  window.onReady(function onReady() {
-            //    game.onload();
+            window.onReady(function onReady() {
+                game.onload();
             });
         </script>
 
