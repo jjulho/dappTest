@@ -50,7 +50,6 @@
   }
   </style>
 
-  <li> ** 게임스코어 보드 : 총 등록자수 <span id="totalPlayers"></span>명 **</li>
 
   <table id=scoreboard-table>
     <thread>
@@ -83,7 +82,7 @@
           <td> Contract addr </td> <td id=contractAddr> none </td>
       </tr>
       <tr>
-          <td> Total Prize (Eth) </td> <td id=total-players> none </td>
+          <td> Total Prize (Eth) </td> <td id=total-pize> none </td>
       </tr>
       <tr>
           <td> Total Players </td> <td id=total-players> none </td>
@@ -154,7 +153,7 @@ function getLink(addr) {
 
 function getTotalPlayers() {
   Scoreboard.GetTotalPlayers(function(e,r){
-    document.getElementById('totalPlayers').innerHTML = r.toNumber();
+    document.getElementById('total-players').innerHTML = r.toNumber();
   });
 }
 
